@@ -7,7 +7,7 @@ module Configuration
  #    attr_accessor :from_directories
  #  end
   def define_setting(name, default = nil)
-  	"@#{name}" = default
+  	instance_variable_set("@#{name}", default)
   end
 end
 

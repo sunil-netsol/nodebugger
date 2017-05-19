@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{remove debugger}
   spec.description   = %q{remove debugger from the specified directory}
-  spec.homepage      = ""
+  spec.homepage      = 'http://rubygems.org/gems/nodebugger'
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
