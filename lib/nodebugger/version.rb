@@ -6,5 +6,5 @@ module Nodebugger
       @from_directories = %w(app/controllers app/models app/views)         
     end
   end
-  VERSION = "0.0.3"
+  VERSION = "0.0.4"
 end
