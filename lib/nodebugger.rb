@@ -1,10 +1,34 @@
 require "nodebugger/version"
-require 'helpers/configuration'
-class Nodebugger
-	extend Configuration
-	define_setting :from_directories, %w(controllers helpers models)
+# require_relative 'nodebugger/version'
+# require 'nodebugger/configuration'
 
-  def initialize
-    p "this directories is #{@from_directories}"	
+module Nodebugger
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.reset
+    @configuration = Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
+  end
+
+  def self.run
+    Nodebugger.configuration.from_directories.try(:each) do |directory|
+      files = Dir.glob("directory/*.rb")
+      files.each do |filename|
+        if File.readlines(filename).grep(/debugger/).any?
+          text = File.read(filename)
+          new_contents = text.gsub(/debugger/, "").gsub /^$\n/, ''
+          File.open(filename, "w") {|file| file.puts new_contents }
+        end
+      end
+    end    
   end
 end
