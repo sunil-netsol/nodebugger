@@ -3,8 +3,8 @@ module Nodebugger
     attr_accessor :from_directories
     
     def initialize
-      @from_directories = %w(controller model view)         
+      @from_directories = %w(app/controllers app/models app/views)         
     end
   end
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
 end

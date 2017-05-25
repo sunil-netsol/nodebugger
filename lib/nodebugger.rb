@@ -19,14 +19,16 @@ module Nodebugger
     yield(configuration)
   end
 
-  def self.run
-    Nodebugger.configuration.from_directories.try(:each) do |directory|
-      files = Dir.glob("directory/*.rb")
+  def self.run    
+    Nodebugger.configuration.from_directories.each do |directory|
+      files = Dir.glob("#{directory}/*.rb")
       files.each do |filename|
         if File.readlines(filename).grep(/debugger/).any?
-          text = File.read(filename)
-          new_contents = text.gsub(/debugger/, "").gsub /^$\n/, ''
-          File.open(filename, "w") {|file| file.puts new_contents }
+          text = File.read(filename).split("debugger")
+
+          # new_contents = text.gsub(/debugger/, "").gsub /^$\n/, ''
+          File.open(filename, "w") {|file| file.puts text.map(&:rstrip).join }
+          # /^[\s]*$\n/
         end
       end
     end    
