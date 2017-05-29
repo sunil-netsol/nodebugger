@@ -4,6 +4,7 @@ class NodebuggerGenerator < Rails::Generators::Base
     create_file "config/initializers/nodebugger.rb", "Nodebugger.configure do |config|
 	#pass directories to remove debugger from
 	#config.from_directories = %w(app/controllers app/models app/views)
+	#config.recursive = false
 end"
   end
 end

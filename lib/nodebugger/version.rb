@@ -1,10 +1,11 @@
 module Nodebugger
 	class Configuration
-    attr_accessor :from_directories
+    attr_accessor :from_directories, :recursive
     
     def initialize
-      @from_directories = %w(app/controllers app/models app/views)         
+      @from_directories = %w(app/controllers app/models app/views)
+      @recursive = false         
     end
   end
-  VERSION = "0.0.4"
+  VERSION = "0.1.0"
 end
