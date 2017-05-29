@@ -5,6 +5,7 @@ class NodebuggerGenerator < Rails::Generators::Base
 	#pass directories to remove debugger from
 	#config.from_directories = %w(app/controllers app/models app/views)
 	#config.recursive = false
+	#config.extensions_only = '.{rb, coffee, js}' # leave commented for all extentions
 end"
   end
 end

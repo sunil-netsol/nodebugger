@@ -24,6 +24,7 @@ Or install it yourself as:
 rails generate nodebugger
 #this will crearte nodebugger.rb in /config/initializers. In this file set directories to remove debugger from
 #set recursive to true to remove from subdirectories
+# pass extensions for particular file extention config.extensions_only = '.{rb, coffee, js}'
 #run command
  Nodebugger.run
 

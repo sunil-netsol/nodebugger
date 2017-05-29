@@ -19,21 +19,22 @@ module Nodebugger
     end
 
     def run
+      extensions_only = Nodebugger.configuration.extensions_only
       Nodebugger.configuration.from_directories.each do |directory|
-        files =[]
+        files =[]        
         if Nodebugger.configuration.recursive
-          files = recursion(directory, files)       
+          files = recursion(directory, files, extensions_only)       
         else
-          files = Dir.glob("#{directory}/*").select { |f| File.file?(f) }
+          files = Dir.glob("#{directory}/*" << extensions_only).select { |f| File.file?(f) }
         end
         process_files(files)        
       end
     end
 
-    def recursion(directory, files)
+    def recursion(directory, files, extensions_only)
       files << Dir.glob("#{directory}/*").select { |f| File.file?(f) }
       files = files.flatten!    
-      dirs = Dir.glob("#{directory}/*").select { |f| File.directory?(f) }
+      dirs = Dir.glob("#{directory}/*" << extensions_only).select { |f| File.directory?(f) }
       dirs.each do |dir|
         recursion(dir, files)
       end
@@ -50,5 +51,5 @@ module Nodebugger
       end
     end
   end
-  
+
 end
