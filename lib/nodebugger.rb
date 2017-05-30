@@ -25,18 +25,18 @@ module Nodebugger
         if Nodebugger.configuration.recursive
           files = recursion(directory, files, extensions_only)       
         else
-          files = Dir.glob("#{directory}/*" << extensions_only).select { |f| File.file?(f) }
+          files = Dir.glob("#{directory}/*." << extensions_only).select { |f| File.file?(f) }
         end
         process_files(files)        
       end
     end
 
     def recursion(directory, files, extensions_only)
-      files << Dir.glob("#{directory}/*").select { |f| File.file?(f) }
+      files << Dir.glob("#{directory}/*" << extensions_only).select { |f| File.file?(f) }
       files = files.flatten!    
-      dirs = Dir.glob("#{directory}/*" << extensions_only).select { |f| File.directory?(f) }
+      dirs = Dir.glob("#{directory}/*").select { |f| File.directory?(f) }
       dirs.each do |dir|
-        recursion(dir, files)
+        recursion(dir, files, extensions_only)
       end
       files
     end
